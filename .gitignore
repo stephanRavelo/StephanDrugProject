@@ -1,1 +1,3 @@
-.StephanDrugProject-env
+StephanDrugProject-env/
+__pycache__/
+.idea/
