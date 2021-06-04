@@ -61,7 +61,7 @@ def load_files(csv_files: 'list[str]', json_files: 'list[str]') -> pd.DataFrame:
     df = pd.concat(df_list, sort=True).set_index('id')
     return df
 
-
+# Adding a new dimension "SourceFile" reduce the search field either one is searching the pubmed mention or the clicnical mention
 def enhanced_load_files(csv_pubmed_files: 'list[str]', csv_clinical_files: 'list[str]', json_files: 'list[str]') -> pd.DataFrame:
     """ Load the pubmed csv, clinical csv and json files to return a pandas dataframe """
     df_list = list()  # list containing the different dataframes
@@ -109,7 +109,6 @@ def cleaning_df (df : pd.DataFrame) -> pd.DataFrame :
 def finding_mention(substring: str, df_reference: pd.DataFrame, search_col: str = "title") -> pd.DataFrame:
     """ Return a df that contains the substring in a specified dataframe of reference (e.g: pubmed dataframe).
     If no match is found, return an empty df"""
-
 
     df = pd.DataFrame(columns=['title', 'journal', 'date'])
     df = df_reference[df_reference[search_col].str.contains(substring, case=False)]
@@ -159,7 +158,9 @@ def generate_link(df_drugs: pd.DataFrame, df_reference: pd.DataFrame) -> {}:
         drug_dict[drug]["clinicalTrialDate"] = finding_mention(drug, df_reference, "title")["date"].to_list()
     return drug_dict
 
+# Here are two choices for building the json files
 
+# build the json with the drug as key. Easy to read
 def enhanced_generate_link(df_drugs: pd.DataFrame, df_reference: pd.DataFrame) -> {}:
     """ return a python dict including the link graph between the drugs and the different publication in the journal
     and scientific trials"""
@@ -183,7 +184,7 @@ def enhanced_generate_link(df_drugs: pd.DataFrame, df_reference: pd.DataFrame) -
         drug_dict[drug]["clinicalTrialDate"] = finding_clinical_mention(drug, df_reference, "title")["date"].to_list()
     return drug_dict
 
-
+# This was inspired by the structure of the pubmed.json file as a list of multiple dictionaries.
 def enhanced_generate_link_list(df_drugs: pd.DataFrame, df_reference: pd.DataFrame) -> 'list({})':
     """ return a list of python dictionnaries (inspired by the pubmed.json file) including the link graph between the drugs and the different publication in the journal
     and scientific trials"""
