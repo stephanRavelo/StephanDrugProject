@@ -37,3 +37,4 @@ LEFT JOIN
                                             )
         GROUP BY tra.clientid, tra.date
     ) as vd
+---

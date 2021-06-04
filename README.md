@@ -14,7 +14,7 @@ There are four input files which are available in the input directory:
 
 An example of this json file is available in the output directory
 ##### Contributor : 
-Only I was working on this project
+Only I was working on this project.
 
 
 
