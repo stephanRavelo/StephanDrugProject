@@ -5,7 +5,7 @@ from typing import TextIO
 from typing import Union
 
 PATH_PROJECT = 'input/'
-OUTPUT_PATH= 'output/'
+OUTPUT_PATH = 'output/'
 
 
 def load_csv(filename: str) -> pd.DataFrame:
@@ -17,7 +17,7 @@ def load_csv(filename: str) -> pd.DataFrame:
     except IOError:
         print("Error: There is no such file or directory for CSV Files")
 
-
+#
 def load_csv_bis(filename: str) -> pd.DataFrame:
     """ Create a pandas dataframe based on the csv file. Also renaming columns knowing the different possible cases"""
     column_pattern = ["id", "title", "date", "journal"]
@@ -186,7 +186,7 @@ def enhanced_generate_link(df_drugs: pd.DataFrame, df_reference: pd.DataFrame) -
 
 # This was inspired by the structure of the pubmed.json file as a list of multiple dictionaries.
 def enhanced_generate_link_list(df_drugs: pd.DataFrame, df_reference: pd.DataFrame) -> 'list({})':
-    """ return a list of python dictionnaries (inspired by the pubmed.json file) including the link graph between the drugs and the different publication in the journal
+    """ return a list of python dictionaries (inspired by the pubmed.json file) including the link graph between the drugs and the different publication in the journal
     and scientific trials"""
 
     drug_dict = dict()
@@ -213,8 +213,8 @@ def enhanced_generate_link_list(df_drugs: pd.DataFrame, df_reference: pd.DataFra
 def generate_json_file(filepath: str, drug_link: any) -> any:
     """ Generate the json file representing the link between drugs and the different pubmed and clinical trials"""
     try :
-        with open(OUTPUT_PATH + 'generatedDrugLink.json', 'a') as fp:
-            #Open file in append mode. If file does not exist, it creates a new file.
+        with open(OUTPUT_PATH + 'generatedDrugLinkList.json', 'a') as fp:
+            # Open file in append mode. If file does not exist, it creates a new file.
             json.dump(drug_link, fp, indent=2, sort_keys=False)
     except IOError:
         print("Error: Please verify the input ")
